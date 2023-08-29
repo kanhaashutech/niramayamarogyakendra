@@ -11,7 +11,6 @@
 
 
 
-
     <link rel="stylesheet" href="style.css">
     <!-- /* google fonts */ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +36,7 @@
         </div>
         <i class="fa-solid fa-bars" onClick="myFunction()"></i>
         <ul id="menu">
-            
+
 
             <li><a href="#home">Home</a></li>
             <li><a href="#treatment">Treatments</a></li>
@@ -86,43 +85,42 @@
 
                     <img src="anidra.jpg" alt="image">
                     <h3>Anidra</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>Anidra or Insomnia is the most commonly reported sleep problem, which profoundly affects the
+                        person’s quality of life. </p>
                 </div>
                 <div class="t2" id="card"><img src="cervical.jpg" alt="image">
                     <h3>Cervical</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>Cervical spondylosis is the medical term for neck pain caused by age-related changes to bones and
+                        tissues.</p>
                 </div>
                 <div class="t3" id="card"><img src="Knee-pain.jpg" alt="image">
                     <h3>Knee Pain</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>The most common causes of knee pain are related to aging, injury or repeated stress on the knee.
+                    </p>
                 </div>
                 <div class="t4" id="card"><img src="hemicrania-continua.jpg" alt="image">
                     <h3>Hemicrania</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>Hemicrania continua is a chronic and persistent form of headache and always occurs on the same
+                        side of the face and head.</p>
                 </div>
                 <div class="t5" id="card"><img src="Sciatica.jpg" alt="image">
                     <h3>Sciatica</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>Sciatica happens when inflammation, pinching or compression affect one or more nerves that run
+                        down your lower back and into your legs</p>
                 </div>
                 <div class="t6" id="card"><img src="Paralysis.jpg" alt="image">
                     <h3>Paralysis</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>If you have paralysis, you are partly or entirely unable to move the affected parts of the body.
+                    </p>
                 </div>
                 <div class="t7" id="card"><img src="frozen-shoulder.jpg" alt="image">
                     <h3>Frozen Shoulder</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>Also known as adhesive capsulitis, frozen shoulder is usually caused by inflammation.</p>
                 </div>
                 <div class="t8" id="card"><img src="slip-disk.jpg" alt="image">
                     <h3>Slip Disk</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos illum obcaecati quidem,
-                        voluptas debitis eos.</p>
+                    <p>A slipped disc is when a soft cushion of tissue between the bones in your spine pushes out. It's
+                        painful if it presses on nerves.</p>
                 </div>
             </div>
         </div>
@@ -238,7 +236,9 @@
                 <br> <br>
                 Be well, <br>
                 <b>Dr. Surya Yadav </b><br>
-                <span>87/69 खलासी लाइन, कीडगंज, प्रयागराज, <br>Allahabad, India, Uttar Pradesh</span><br>
+                <span>87/69 खलासी लाइन, कीडगंज, प्रयागराज <br>13K / 1 ताशकंद मार्ग, सेंट जोसेफ कॉलेज के सामने, सिविल
+                    लाइंस, प्रयागराज <br>Allahabad, Uttar Pradesh, India</span><br>
+                <!-- <span>13K / 1 ताशकंद मार्ग, सेंट जोसेफ कॉलेज के सामने, सिविल लाइंस, प्रयागराज <br></span><br> -->
                 <span>+91 7905534863</span>
 
 
@@ -260,15 +260,42 @@
                 </div>
 
                 <div class="form">
-                    <form>
-                        <input type="text" id="name" placeholder="Name">
-                        <input type="text" aria-label="Phone" id="phno" placeholder="Phone Number">
-                        <input type="text" id="mess" placeholder="Message">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" id="name" placeholder="Name" name="NAME">
+                        <input type="text" aria-label="Phone" id="phno" placeholder="Phone Number" name="MOBILE NO.">
+                        <input type="text" id="mess" placeholder="Message" name="MESSAGE">
                         <input type="submit" id="sub">
+                        <span id="success"> </span>
                     </form>
 
+
+                    <script>
+                        const scriptURL = 'https://script.google.com/macros/s/AKfycby3a1dPhOuuZ-u2U4-oeEWDdXsYZtsoF9BdjRd9Lzp11-uwO2VjUAhhHAlTVWxFKy7R8Q/exec'
+                        const form = document.forms['submit-to-google-sheet']
+                        const success = document.getElementById('success');
+
+                        form.addEventListener('submit', e => {
+                            e.preventDefault()
+                            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                                .then(response => {
+                                    success.innerHTML = "Data Successfully Submitted";
+
+                                    setTimeout(function () {
+                                        success.innerHTML = " ";
+                                    }, 3000)
+                                    form.reset();
+                                })
+                                .catch(error => console.error('Error!', error.message))
+                        })
+                    </script>
                 </div>
             </div>
+
+
+
+
+
+
             <div class="contact-info">
                 <div class="phone-number" id="infocard">
                     <div class="info-img">
@@ -276,7 +303,7 @@
                             <img src="emergency-call.png" alt="call img"> </a>
                     </div>
                     <div class="info-txt">
-                        <a href="tel: +91 9303580738">
+                        <a href="tel: +91 79055 34863">
                             <h3>Call Us Now</h3>
                             <p>+91 79055 34863</p>
                         </a>
@@ -344,6 +371,8 @@
                     <p> <i class="fas fa-phone"></i>+91 79055 34863</p>
                     <p> <i class="fas fa-envelope"></i>suryasoftech@gmail.com</p>
                     <p> <i class="fas fa-map-marked-alt"></i>87, Kydganj Rd, Prayagraj, Uttar Pradesh 2112138</p>
+                    <p> <i class="fas fa-map-marked-alt"></i>13K / 1 ताशकंद मार्ग, सेंट जोसेफ कॉलेज के सामने, सिविल
+                        लाइंस, प्रयागराज (2nd address)</p>
                     <div class="share">
 
 
