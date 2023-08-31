@@ -2039,6 +2039,8 @@ nav .fa-solid {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        
+        height: 95px;
     }
 
     .page5 .contact-info .address .info-img {
